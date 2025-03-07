@@ -1,4 +1,4 @@
 .idea/
-bin/
-obj/
-.vs/
+WebApi/bin/
+WebApi/obj/
+WebApi/.vs/
