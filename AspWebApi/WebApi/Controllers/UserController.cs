@@ -15,9 +15,9 @@ public class UserController:Controller
     }
 
     [HttpGet("get/{login}/{password}")]
-    public ActionResult<User> GetUserId(string login,string password)
+    public async Task<ActionResult<User>> GetUserId(string login,string password)
     {
-        var user=_repository.GetAll().FirstOrDefault(p=>p.Login == login && p.Password == password);
+        var user=(await _repository.GetAllAsync()).FirstOrDefault(p=>p.Login == login && p.Password == password);
         if (user != null)
             return Ok(user);
         else return NotFound();

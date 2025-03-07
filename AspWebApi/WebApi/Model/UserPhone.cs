@@ -2,7 +2,7 @@
 
 namespace WebApi.Model;
 
-public class UserPhones
+public class UserPhone
 {
     [Key]
     public int Id { get; set; }
