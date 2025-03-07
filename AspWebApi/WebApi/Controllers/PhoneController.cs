@@ -8,9 +8,11 @@ namespace WebApi.Controllers;
 public class PhoneController:Controller
 {
     private Repository<Phone> _repository;
+    private Repository<UserPhone> _repositoryUserPhone;
     public PhoneController(Context context)
     {
         _repository=new Repository<Phone>(context);
+        _repositoryUserPhone=new Repository<UserPhone>(context);
     }
 
     [HttpGet("getall")] 
@@ -20,16 +22,40 @@ public class PhoneController:Controller
     }
     
     [HttpGet("get/{id}")] 
-    public ActionResult<IEnumerable<Phone>> Get(int id)
+    public ActionResult<Phone> Get(int id)
     {
         return Ok(_repository.GetId(id));
     }
-
-    [HttpPost("add")]
-    public async Task<ActionResult> Add(Phone phone)
+    
+    //userphone
+    [HttpGet("getfavorites/{id}")] 
+    public async Task<ActionResult<IEnumerable<Phone>>> GetFavorites(int userid)
     {
-        await _repository.Add(phone);
-        return Ok();
+        var favorites=(await _repositoryUserPhone.GetAllAsync()).Where(p => p.UserId == userid).ToList();
+        if (favorites.Count > 0)
+        {
+            var result = new List<Phone>();
+            foreach (var obj in favorites)
+            {
+                result.Add(await _repository.GetIdAsync(obj.PhoneId));
+            }
+
+            return Ok(result);
+        } else return NotFound();
     }
+
+    [HttpPost("addfavorite")]
+    public async Task<ActionResult> AddFavorites([FromBody] UserPhonePost userphone)
+    {
+        if ((await _repositoryUserPhone.GetAllAsync()).FirstOrDefault(p => p.UserId == userphone.UserId && p.PhoneId == userphone.PhoneId) == null)
+        {
+            var obj = new UserPhone();
+            obj.UserId = userphone.UserId;
+            obj.PhoneId = userphone.PhoneId;
+            await _repositoryUserPhone.Add(obj);
+            return Ok();
+        } else return BadRequest();
+    }
+    
     
 }
