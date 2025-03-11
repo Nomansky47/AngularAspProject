@@ -1,6 +1,7 @@
-Angular/ASP.net project.
-ASP.net used to create backend part, that provides connection to database (postgres) and provides REST API for Angular part.
+# Angular/ASP.net project.
 
-Angular project libraries: Axios, Angular Material
+Example of project, where ASP.net used to create backend part, that provides connection to database (postgres) and provides REST API for Angular part.
 
-ASP.net project libraries: Entity Framework Core
+## Angular project frameworks/libraries: Axios, Angular Material
+
+## ASP.net project frameworks/libraries: Entity Framework Core
