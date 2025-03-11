@@ -18,13 +18,19 @@ public class PhoneController:Controller
     [HttpGet("getall")] 
     public async Task<ActionResult<IEnumerable<Phone>>> GetAll()
     {
-        return Ok(await _repository.GetAll());
+        var list=await _repository.GetAll();
+        if (list.Count > 0)
+            return Ok(list);
+        else return NoContent();
     }
     
     [HttpGet("get/{id}")] 
     public async  Task<ActionResult<Phone>> Get(int id)
     {
-        return Ok(await _repository.GetId(id));
+        var phone=await _repository.GetId(id);
+        if (phone != null)
+            return Ok(phone);
+        else return NotFound();
     }
     
     //userphone

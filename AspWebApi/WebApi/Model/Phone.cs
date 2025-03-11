@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebApi.Model;
 
@@ -17,4 +18,6 @@ public class Phone
     public string ImageLink { get; set; } 
     [ForeignKey("InfoId")]
     public virtual PhoneInfo PhoneInfo { get; set; }
+    [JsonIgnore]
+    public virtual ICollection<UserPhone> UserPhone { get; set; }
 }

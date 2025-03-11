@@ -1,15 +1,16 @@
 import {Component} from "@angular/core";
-import { ActivatedRoute} from "@angular/router";
+import { ActivatedRoute, RouterLink} from "@angular/router";
 import {Subscription} from "rxjs";
 import { DataContext } from "./Data/app.data.DataContext";
 import {MatCardModule} from '@angular/material/card';
 import { PhoneInfo } from "./Model/app.model.phoneinfo";
 import { Phone } from "./Model/app.model.phone";
+import { MatButton } from "@angular/material/button";
 @Component(
     {
         selector:"cardinfo",
         standalone:true,
-        imports:[MatCardModule],
+        imports:[MatCardModule,MatButton,RouterLink],
         providers:[DataContext],
         templateUrl:"./app.cardinfo.html"
     }

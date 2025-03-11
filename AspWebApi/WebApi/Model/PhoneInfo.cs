@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebApi.Model;
 
@@ -18,6 +19,6 @@ public class PhoneInfo
     public string OS { get; set; }
     [Required]
     public string ImageLink { get; set; }
-    
+    [JsonIgnore]
     public virtual ICollection<Phone> Phone { get; set; }
 }
