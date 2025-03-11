@@ -11,7 +11,7 @@ import { CardList } from './app.cardlist';
   templateUrl: './app.allcards.html',
 })
 
-
+//компонент со списком на главной странице
 export class AllCards{
     @Input()
     ItemsList: Phone[]=[]

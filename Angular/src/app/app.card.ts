@@ -1,5 +1,5 @@
 import {Input,Component} from "@angular/core";
-import {MatCard, MatCardContent,MatCardActions} from "@angular/material/card";
+import {MatCard, MatCardContent,MatCardActions, MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from '@angular/material/button';
 import { RouterLink } from "@angular/router";
 import { LocalInfo } from "./Data/app.data.LocalInfo";
@@ -10,12 +10,14 @@ import { MatSnackBar } from "@angular/material/snack-bar";
     {
         selector:"card",
         standalone:true,
-        imports:[ MatCard,MatCardContent,MatCardActions,MatButtonModule,RouterLink],
+        imports:[MatCardModule,MatCardActions,MatButtonModule,RouterLink],
         providers:[LocalInfo,DataContext,MatSnackBar],
         templateUrl:"./app.card.html"
     }
 )
 
+
+//компонент карточки телефона
 export class Card {
     @Input() id=-1;
     @Input() name="";

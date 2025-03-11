@@ -2,10 +2,10 @@
     <div style="padding-top: 1%;">
     <button mat-stroked-button [routerLink]="['']">back</button>
     </div>
-
     <div style="padding-top: 1%;">
     <mat-card appearance="outlined" style="width: 50%;">
-    <mat-card-title style="padding-left: 2%;">{{phone.name}}</mat-card-title>
+    <img mat-card-image [src]="phoneInfo.imageLink" alt="phone image">
+    <mat-card-title style="padding-left: 2%;" >{{phone.name}}</mat-card-title>
     <mat-card-content> Desciption: {{phoneInfo.description}}</mat-card-content>
     <mat-card-content>Country: {{phoneInfo.country}}</mat-card-content>
     <mat-card-content>Resolution: {{phoneInfo.resolutionX}} x {{phoneInfo.resolutionY}}</mat-card-content>

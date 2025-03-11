@@ -16,6 +16,7 @@ import { MatButton } from "@angular/material/button";
     }
 )
 
+//компонент для отображения информации о телефоне
 export class CardInfo {
 
     id:number|undefined;

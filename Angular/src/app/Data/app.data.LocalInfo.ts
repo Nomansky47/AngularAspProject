@@ -1,6 +1,7 @@
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from "@angular/core";
 
+//Управление Cookie
 @Injectable()
 export class LocalInfo{
     

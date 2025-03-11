@@ -4,7 +4,7 @@ import { User } from "../Model/app.model.user";
 import axios from 'axios';
 import { PhoneInfo } from "../Model/app.model.phoneinfo";
 
-
+//Http запросы
 @Injectable()
 export class DataContext{
 
@@ -37,6 +37,7 @@ export class DataContext{
             {
                 if (value!=undefined)
                 user=value.data;
+                
             }
         )
         .
@@ -64,7 +65,7 @@ export class DataContext{
         }).then(
             (responce)=>
             {
-                console.log(responce);
+                
             }
         ).catch(
             (value)=>

@@ -18,7 +18,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   templateUrl: './app.maincomponent.html'
 })
 
-
+//Основной компонент-каркас. Содержит routerOutlet, для отображения страниц, а также верхние компоненты с авторизацией/регистрацией
 export class AppComponent{
   isAuthorized=false;
   login="";
@@ -30,7 +30,6 @@ export class AppComponent{
 
   constructor(private localInfo:LocalInfo,private dataContext:DataContext,private snackBar:MatSnackBar)
   {
-
 
   }  
 

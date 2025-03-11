@@ -10,7 +10,7 @@ import { Phone } from "./Model/app.model.phone";
   })
 
 
-
+//Компонент отображения списка (нужен, для использования в других компонентах)
 export class CardList{
     @Input()
     Cards:Phone[]=[];

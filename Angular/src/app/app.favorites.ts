@@ -16,9 +16,7 @@ import { CardList } from "./app.cardlist";
 )
 
 
-
-
-
+//Компонент со списком телефонов в фаворитах у пользователя
 export class Favorites{
 
     phones:Phone[]=[];
