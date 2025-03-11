@@ -17,7 +17,7 @@ public class UserController:Controller
     [HttpGet("get/{login}/{password}")]
     public async Task<ActionResult<User>> GetUserId(string login,string password)
     {
-        var user=(await _repository.GetAllAsync()).FirstOrDefault(p=>p.Login == login && p.Password == password);
+        var user=await _repository.Get(p=>p.Login == login && p.Password == password);
         if (user != null)
             return Ok(user);
         else return NotFound();
@@ -26,7 +26,7 @@ public class UserController:Controller
     [HttpPost("add")]
     public async Task<ActionResult> Add( [FromBody] UserPost userPost)
     {
-        if ((await _repository.GetAllAsync()).FirstOrDefault(p => p.Login == userPost.login) == null)
+        if (await _repository.Get(p => p.Login == userPost.login) == null)
         {
             var user = new User();
             user.Login = userPost.login;

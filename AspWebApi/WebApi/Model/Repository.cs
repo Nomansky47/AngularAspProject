@@ -25,25 +25,25 @@ public class Repository<T> : IRepoBase<T> where T : class
         await _context.SaveChangesAsync();
     }
 
-    public T? GetId(int id)
+    public async Task<T?> Get(Func<T,bool> predicate)
     {
-        return _context.Set<T>().Find(id);
+        return _context.Set<T>().FirstOrDefault(predicate);
     }
 
-    public async Task<T?> GetIdAsync(int id)
+    public async Task<T?> GetId(int id)
     {
         return await _context.Set<T>().FindAsync(id);
     }
 
-    public IEnumerable<T> GetAll()
+    public async Task<List<T>> GetAll()
     {
-        return _context.Set<T>().ToList();
+        return await Task.Run(() => _context.Set<T>().ToList());
+    }
+    public async Task<List<T>> GetAll(Func<T,bool> predicate)
+    {
+        return await Task.Run(() => _context.Set<T>().Where(predicate).ToList());
     }
 
-    public async Task<IEnumerable<T>> GetAllAsync()
-    {
-        return await Task.Run(() => _context.Set<T>());
-    }
 
     public async Task Remove(T objModel)
     {

@@ -14,9 +14,9 @@ public class PhoneInfoController:Controller
     }
     
     [HttpGet("get/{id}")]
-    public ActionResult<PhoneInfo> Get(int id)
+    public async Task<ActionResult<PhoneInfo>> Get(int id)
     {
-        return Ok(_repository.GetId(id));
+        return Ok(await _repository.GetId(id));
     }
     
     

@@ -83,6 +83,50 @@ export class DataContext{
 
     }
 
+    async getFavorites(userId:number):Promise<Phone[]>
+    {
+        let phones:Phone[]=[];
+        try{
+        await axios.get(this.BaseUrl+"phone/favorites/"+userId.toString()).then(
+            (value)=>
+            {
+                phones=value.data;
+            }
+        ).catch(
+            (value)=>
+            {
+                phones=[];
+            }
+        )
+        }
+        catch(error)
+        {
+            return phones;
+        }
+        return phones;
+    }
+
+    async addFavorites(userId:number,phoneId:number):Promise<boolean>
+    {
+        let result=true;
+        try{
+            await axios.post(this.BaseUrl+"phone/addfavorites",{
+                userId,
+                phoneId
+            }).catch(
+                (responce)=>
+                {
+                    result=false;
+                }
+            );
+        }
+        catch(error)
+        {
+            result=false;
+        }
+        return result;
+    }
+
 
 }
 

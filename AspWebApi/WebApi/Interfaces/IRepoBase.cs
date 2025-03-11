@@ -5,10 +5,10 @@
     {
         Task Add(T objModel);
         Task AddRange(IEnumerable<T> objModel);
-        T? GetId(int id);
-        Task<T?> GetIdAsync(int id);
-        IEnumerable<T> GetAll();
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<T?> GetId(int id);
+        Task<T?> Get(Func<T, bool> predicate);
+        Task<List<T>> GetAll();
+        Task<List<T>> GetAll(Func<T, bool> predicate);
         Task Remove(T objModel);
         void Dispose();
     }

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -13,14 +13,14 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-root',
   standalone:true,
-  imports:[RouterOutlet,MatGridListModule,MatButtonModule,  MatIconModule,MatInputModule,MatExpansionModule,FormsModule],
+  imports:[RouterLink,RouterOutlet,MatGridListModule,MatButtonModule,  MatIconModule,MatInputModule,MatExpansionModule,FormsModule],
   providers:[LocalInfo,DataContext,MatSnackBar],
   templateUrl: './app.maincomponent.html'
 })
 
 
 export class AppComponent{
-  isAuthorised=false;
+  isAuthorized=false;
   login="";
   regLogin="";
   regPassword="";
@@ -30,11 +30,7 @@ export class AppComponent{
 
   constructor(private localInfo:LocalInfo,private dataContext:DataContext,private snackBar:MatSnackBar)
   {
-    let userId=localInfo.GetUserId();
-    if (userId!="")
-    {
-      this.isAuthorised=true;
-    }
+
 
   }  
 
@@ -46,9 +42,11 @@ export class AppComponent{
         if (value!=undefined)
         {
           this.login=this.authLogin;
+          this.id=value.id;
+          this.localInfo.SetUserId(value.id);
           this.authPassword="";
           this.authLogin="";
-          this.isAuthorised=true;
+          this.isAuthorized=true;
         } else this.snackBar.open("Wrong login or password");
 
       }
@@ -67,14 +65,13 @@ export class AppComponent{
            (answer)=> {
             if (answer ==true)
             {
-            this.login=this.regLogin;
             this.regLogin="";
             this.regPassword="";
-            this.isAuthorised=true;
+            this.snackBar.open("Successfull registration");
             }
             } 
           );
-        } else this.snackBar.open("User with this login already exists");
+        } else this.snackBar.open("User with this login already exists. Try another one");
          
       }
     );
@@ -82,13 +79,9 @@ export class AppComponent{
 
   exit()
   {
-    this.isAuthorised=false;
+    this.isAuthorized=false;
     this.login="";
-  }
-
-  favorites()
-  {
-
+    this.localInfo.ClearId();
   }
   
 }

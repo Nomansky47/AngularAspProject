@@ -2,19 +2,21 @@
 
 <main>
 
-@if (isAuthorised)
+@if (isAuthorized)
 {
   <div style="display: flex; justify-content: end;">
-  <mat-expansion-panel style="max-width: 17%;">
+  <mat-expansion-panel style="max-width: 20%;">
     <mat-expansion-panel-header>
       <mat-panel-title> {{login}}</mat-panel-title>
-      
     </mat-expansion-panel-header>
-    <div style="padding-left: 5%;">
-    <button (click)="favorites()" mat-stroked-button>My favorites</button>
+    <div style="padding-left: 5%; justify-self: center;">
+      <button [routerLink]="['']" mat-stroked-button >Main page</button>
+    </div>
+    <div style="padding-left: 5%;  padding-top: 6%; justify-self: center;">
+    <button [routerLink]="['favorites']" mat-stroked-button >My favorites</button>
   </div>
-  <div style="padding-left: 5%;">
-    <button (click)="exit()" mat-stroked-button>Exit</button>
+  <div style="padding-left: 5%; padding-top: 6%; justify-self: center;">
+    <button (click)="exit()" [routerLink]="['']" mat-stroked-button >Exit</button>
   </div>
   </mat-expansion-panel>
 </div>

@@ -10,13 +10,21 @@ export class LocalInfo{
         
     }
 
-    GetUserId():string
+    GetUserId():number
     {
-        return this.cookieService.get("id");
+        let str=this.cookieService.get("id");
+        if (str!="")
+        return Number.parseInt(str);
+        else return -1;
     }
     
     SetUserId(id:number):void
     {
         this.cookieService.set("id",id.toString());
+    }
+
+    ClearId():void
+    {
+        this.cookieService.delete("id");
     }
 }

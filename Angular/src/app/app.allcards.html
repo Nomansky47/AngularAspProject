@@ -1,11 +1,1 @@
-<div class="container" >
-  <div class="row row-cols-4">
-@for(item of ItemsList;track $index)
-{
-  <div class="col">
-  <card [name]="item.name" [id]="item.id" [companyName]="item.companyName">
-  </card>
-</div>
-}
-</div>
-</div>
+<cardlist [Cards]="ItemsList"></cardlist>

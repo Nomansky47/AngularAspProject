@@ -2,7 +2,8 @@
 <mat-card-content>{{name}}</mat-card-content>
 <mat-card-content>{{companyName}}</mat-card-content>
 <mat-card-actions align="end">
-<button mat-stroked-button [routerLink]="['cardinfo',id]">Подробнее</button>
+<button mat-stroked-button [routerLink]="['cardinfo',id]">More details</button>
+<button mat-stroked-button (click)="AddFavorite()">Add to favorites</button>
 </mat-card-actions>
 </mat-card>
 

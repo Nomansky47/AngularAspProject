@@ -16,45 +16,50 @@ public class PhoneController:Controller
     }
 
     [HttpGet("getall")] 
-    public ActionResult<IEnumerable<Phone>> GetAll()
+    public async Task<ActionResult<IEnumerable<Phone>>> GetAll()
     {
-        return Ok(_repository.GetAll());
+        return Ok(await _repository.GetAll());
     }
     
     [HttpGet("get/{id}")] 
-    public ActionResult<Phone> Get(int id)
+    public async  Task<ActionResult<Phone>> Get(int id)
     {
-        return Ok(_repository.GetId(id));
+        return Ok(await _repository.GetId(id));
     }
     
     //userphone
-    [HttpGet("getfavorites/{id}")] 
+    [HttpGet("favorites/{userid}")] 
     public async Task<ActionResult<IEnumerable<Phone>>> GetFavorites(int userid)
     {
-        var favorites=(await _repositoryUserPhone.GetAllAsync()).Where(p => p.UserId == userid).ToList();
+        var favorites=(await _repositoryUserPhone.GetAll(p => p.UserId == userid));
         if (favorites.Count > 0)
         {
             var result = new List<Phone>();
             foreach (var obj in favorites)
             {
-                result.Add(await _repository.GetIdAsync(obj.PhoneId));
+                result.Add(await _repository.GetId(obj.PhoneId));
             }
 
             return Ok(result);
         } else return NotFound();
     }
 
-    [HttpPost("addfavorite")]
+    [HttpPost("addfavorites")]
     public async Task<ActionResult> AddFavorites([FromBody] UserPhonePost userphone)
     {
-        if ((await _repositoryUserPhone.GetAllAsync()).FirstOrDefault(p => p.UserId == userphone.UserId && p.PhoneId == userphone.PhoneId) == null)
+        if (await _repositoryUserPhone.Get(p => p.UserId == userphone.UserId && p.PhoneId == userphone.PhoneId) == null)
         {
             var obj = new UserPhone();
             obj.UserId = userphone.UserId;
             obj.PhoneId = userphone.PhoneId;
             await _repositoryUserPhone.Add(obj);
             return Ok();
-        } else return BadRequest();
+        }
+        else
+        {
+            return BadRequest();
+            
+        }
     }
     
     
